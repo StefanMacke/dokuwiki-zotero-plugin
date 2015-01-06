@@ -1,0 +1,3 @@
+|**Zotero ID**|**Short Name**|**Title**|**Author**|**Date**|**Problems**|
+|[[link|ABC123]]|Macke2011|A nice book|Stefan Macke|2011| |
+|[[link|BCD234]]|Werner2012|A nicer book|Stefan Werner|2012| |

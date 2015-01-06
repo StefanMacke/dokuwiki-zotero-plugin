@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:zapi="http://zotero.org/ns/api">
+  <title>Zotero / StefanMacke / Items</title>
+  <id>http://zotero.org/users/123456/items?content=json&amp;itemType=-attachment</id>
+  <link rel="self" type="application/atom+xml" href="https://api.zotero.org/users/123456/items?content=json&amp;itemType=-attachment"/>
+  <link rel="first" type="application/atom+xml" href="https://api.zotero.org/users/123456/items?content=json&amp;itemType=-attachment"/>
+  <link rel="next" type="application/atom+xml" href="https://api.zotero.org/users/123456/items?content=json&amp;itemType=-attachment"/>
+  <link rel="last" type="application/atom+xml" href="https://api.zotero.org/users/123456/items?content=json&amp;itemType=-attachment"/>
+  <link rel="alternate" type="text/html" href="http://zotero.org/users/123456/items?itemType=-attachment"/>
+  <zapi:totalResults>2</zapi:totalResults>
+  <zapi:apiVersion>1</zapi:apiVersion>
+  <updated>2012-02-11T08:50:23Z</updated>
+  <entry>
+    <title>Test der Synchronisierung</title>
+    <author>
+      <name>StefanMacke</name>
+      <uri>http://zotero.org/stefanmacke</uri>
+    </author>
+    <id>http://zotero.org/stefanmacke/items/B8VN977P</id>
+    <published>2013-03-02T08:35:10Z</published>
+    <updated>2013-03-02T08:35:18Z</updated>
+    <link rel="self" type="application/atom+xml" href="https://api.zotero.org/users/105153/items/B8VN977P?content=json"/>
+    <link rel="alternate" type="text/html" href="http://zotero.org/stefanmacke/items/B8VN977P"/>
+    <zapi:key>B8VN977P</zapi:key>
+    <zapi:version>990</zapi:version>
+    <zapi:itemType>note</zapi:itemType>
+    <zapi:numTags>0</zapi:numTags>
+    <content zapi:type="json" zapi:etag="b956920758e16b0ea90b9b1b33eff2ae">{"itemType":"note","note":"\u003Cp\u003ETest der Synchronisierung\u003C/p\u003E","tags":[]}</content>
+  </entry>
+  <entry>
+    <title>The true power of regular expressions</title>
+    <author>
+      <name>StefanMacke</name>
+      <uri>http://zotero.org/stefanmacke</uri>
+    </author>
+    <id>http://zotero.org/stefanmacke/items/KIECUQ94</id>
+    <published>2013-03-02T08:22:30Z</published>
+    <updated>2013-03-02T08:27:54Z</updated>
+    <link rel="self" type="application/atom+xml" href="https://api.zotero.org/users/105153/items/KIECUQ94?content=json"/>
+    <link rel="up" type="application/atom+xml" href="https://api.zotero.org/users/105153/items/JKWTGFMG?content=json"/>
+    <link rel="alternate" type="text/html" href="http://zotero.org/stefanmacke/items/KIECUQ94"/>
+    <zapi:key>KIECUQ94</zapi:key>
+    <zapi:version>989</zapi:version>
+    <zapi:itemType>attachment</zapi:itemType>
+    <zapi:numTags>0</zapi:numTags>
+    <content zapi:type="json" zapi:etag="597bedcf5472f8b84bdbc6d1f8202edd">{"itemType":"attachment","linkMode":"imported_url","title":"The true power of regular expressions","accessDate":"2013-03-02 08:22:30","url":"http://nikic.github.com/2012/06/15/The-true-power-of-regular-expressions.html","note":"","contentType":"text/html","charset":"utf-8","filename":"The-true-power-of-regular-expressions.html","md5":"50cfaa5d3ca08d0ed22dc9d6b7b208b5","mtime":1362212551078,"tags":[]}</content>
+  </entry>
+  <entry>
+    <title>A nice book</title>
+    <author>
+      <name>StefanMacke</name>
+      <uri>http://zotero.org/stefanmacke</uri>
+    </author>
+    <id>http://zotero.org/stefanmacke/items/ABC123</id>
+    <published>2012-02-11T08:49:27Z</published>
+    <updated>2012-02-11T08:50:23Z</updated>
+    <link rel="self" type="application/atom+xml" href="https://api.zotero.org/users/123456/items/ABC123?content=json"/>
+    <link rel="alternate" type="text/html" href="http://zotero.org/stefanmacke/items/ABC123"/>
+    <zapi:key>ABC123</zapi:key>
+    <zapi:itemType>book</zapi:itemType>
+    <zapi:creatorSummary>Macke</zapi:creatorSummary>
+    <zapi:year>2011</zapi:year>
+    <zapi:numChildren>0</zapi:numChildren>
+    <zapi:numTags>0</zapi:numTags>
+    <content zapi:type="json" zapi:etag="444fa5067e0c8257daed8622a10cdcd0">{"itemType":"book","title":"A nice book","creators":[{"creatorType":"author","firstName":"Stefan","lastName":"Macke"}],"abstractNote":"","series":"","seriesNumber":"","volume":"","numberOfVolumes":"","edition":"1","place":"","publisher":"Pragmatic Programmers","date":"2011","numPages":"141","language":"","ISBN":"","shortTitle":"Macke2011","url":"","accessDate":"","archive":"","archiveLocation":"","libraryCatalog":"","callNumber":"","rights":"","extra":"","tags":[]}</content>
+  </entry>
+  <entry>
+    <title>A nicer book</title>
+    <author>
+      <name>StefanMacke</name>
+      <uri>http://zotero.org/stefanmacke</uri>
+    </author>
+    <id>http://zotero.org/stefanmacke/items/BCD234</id>
+    <published>2012-02-03T09:15:47Z</published>
+    <updated>2012-02-03T09:16:42Z</updated>
+    <link rel="self" type="application/atom+xml" href="https://api.zotero.org/users/123456/items/BCD234?content=json"/>
+    <link rel="alternate" type="text/html" href="http://zotero.org/stefanmacke/items/BCD234"/>
+    <zapi:key>BCD234</zapi:key>
+    <zapi:itemType>book</zapi:itemType>
+    <zapi:creatorSummary>Werner</zapi:creatorSummary>
+    <zapi:year>2012</zapi:year>
+    <zapi:numChildren>0</zapi:numChildren>
+    <zapi:numTags>0</zapi:numTags>
+    <content zapi:type="json" zapi:etag="a512d7b1414d96b56655e03fa7543e5f">{"itemType":"book","title":"A nicer book","creators":[{"creatorType":"author","firstName":"Stefan","lastName":"Werner"}],"abstractNote":"","series":"","seriesNumber":"","volume":"","numberOfVolumes":"","edition":"1","place":"","publisher":"Pragmatic Programmers","date":"2012","numPages":"141","language":"","ISBN":"","shortTitle":"Werner2012","url":"","accessDate":"","archive":"","archiveLocation":"","libraryCatalog":"","callNumber":"","rights":"","extra":"","tags":[]}</content>
+  </entry>
+</feed>
