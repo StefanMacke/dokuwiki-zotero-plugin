@@ -1,32 +1,32 @@
 <?php
 require_once('ZoteroFeedReader.php');
 
+/**
+ * Retrieve Feed
+ */
 class WebZoteroFeedReader implements ZoteroFeedReader
 {
 	/**
 	 * @var ZoteroConfig
 	 */
 	private $config;
-	
-	public function __construct(ZoteroConfig $config)
+
+    /**
+     * Get config instance
+     */
+    public function __construct()
 	{
-		$this->config = $config;
+        $this->config = plugin_load('helper', 'zotero_config');
 	}
-	
-	function getFeed()
+
+    /**
+     * Retrieve content from url
+     *
+     * @return bool|string
+     */
+    function getFeed()
 	{
-		if (!function_exists('curl_init'))
-		{
-			throw new Exception("CURL functions are not available.");
-		}
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $this->config->getUrlForEntries());
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-		$feed = curl_exec($ch);
-		curl_close($ch);
-		return $feed;
+        $http = new DokuHTTPClient();
+        return $http->get($this->config->getUrlForEntries());
 	}
 }
-?>

@@ -4,9 +4,8 @@ require_once('ZoteroConfig.php');
 class IniConfig extends ZoteroConfig
 {
 	public function __construct()
-	{	
-		$this->config = parse_ini_file(dirname(__FILE__) . DIRECTORY_SEPARATOR . "config.ini", true);
+	{
+		$this->config = parse_ini_file(DOKU_PLUGIN . 'zotero/config.ini', true);
 		parent::__construct();
 	}
-}	
-?>
+}

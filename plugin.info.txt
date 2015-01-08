@@ -1,0 +1,7 @@
+base    zotero
+author  Stefan Macke
+email   me@stefan-macke.de
+date    2013-03-03
+name    Zotero Plugin
+desc    Links quotes to Zotero sources
+url     https://www.dokuwiki.org/plugin:zotero

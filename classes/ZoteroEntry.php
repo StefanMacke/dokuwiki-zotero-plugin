@@ -1,4 +1,8 @@
 <?php
+
+/**
+ * Entity with properties of an entry from Zotero
+ */
 class ZoteroEntry
 {
 	const AUTHOR_PLACEHOLDER = "AUTHOR";
@@ -10,8 +14,12 @@ class ZoteroEntry
 	private $title;
 	private $author;
 	private $date;
-	
-	public function __construct($zoteroId)
+    private $pages = '';
+
+    /**
+     * @param $zoteroId
+     */
+    public function __construct($zoteroId)
 	{
 		$this->zoteroId = $zoteroId;
 	}
@@ -20,8 +28,11 @@ class ZoteroEntry
 	{
 		return $this->zoteroId;
 	}
-	
-	public function setCiteKey($value)
+
+    /**
+     * @param $value
+     */
+    public function setCiteKey($value)
 	{
 		$this->citeKey = $value;
 	}
@@ -31,7 +42,10 @@ class ZoteroEntry
 		return $this->citeKey;
 	}
 
-	public function setTitle($value)
+    /**
+     * @param $value
+     */
+    public function setTitle($value)
 	{
 		$this->title = $value;
 	}
@@ -41,7 +55,10 @@ class ZoteroEntry
 		return $this->title;
 	}
 
-	public function setAuthor($value)
+    /**
+     * @param $value
+     */
+    public function setAuthor($value)
 	{
 		$this->author = $value;
 	}
@@ -51,7 +68,10 @@ class ZoteroEntry
 		return $this->author;
 	}
 
-	public function setDate($value)
+    /**
+     * @param $value
+     */
+    public function setDate($value)
 	{
 		$this->date = $value;
 	}
@@ -60,8 +80,26 @@ class ZoteroEntry
 	{
 		return $this->date;
 	}
-  
-  	public function getYear()
+
+    /**
+     * @param $value
+     */
+    public function setPages($value)
+    {
+        $this->pages = $value;
+    }
+
+    public function getPages()
+    {
+        return $this->pages;
+    }
+
+    /**
+     * Returns year
+     *
+     * @return int
+     */
+    public function getYear()
 	{
 		$year = 0;
 		$matches = array();
@@ -71,8 +109,14 @@ class ZoteroEntry
 		}
 		return $year;
 	}
-	
-	public function getShortInfo($format = "")
+
+    /**
+     * Parsed short info string
+     *
+     * @param string $format string with eventually some placeholders
+     * @return string
+     */
+    public function getShortInfo($format = "")
 	{
 		$date = $this->getYear();
 		if ($date === 0)
@@ -92,13 +136,22 @@ class ZoteroEntry
 			return $title;
 		}
 	}
-	
-	public function __toString()
+
+    /**
+     * @return string
+     */
+    public function __toString()
 	{
 		return $this->getShortInfo();
 	}
-	
-	public function equals(ZoteroEntry $other)
+
+    /**
+     * Is given object equal to this object
+     *
+     * @param ZoteroEntry $other
+     * @return bool
+     */
+    public function equals(ZoteroEntry $other)
 	{
 		return $this->getZoteroId() === $other->getZoteroId()
 			&& $this->getCiteKey() === $other->getCiteKey()
@@ -106,5 +159,5 @@ class ZoteroEntry
 			&& $this->getDate() === $other->getDate()
 			&& $this->getTitle() === $other->getTitle();
 	}
+
 }
-?>

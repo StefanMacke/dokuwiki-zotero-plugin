@@ -20,5 +20,5 @@ $entries = $webRepo->getAllEntries();
 
 $textRepo->saveEntries($entries);
 
-echo count($textRepo->getAllEntries()) . " entries imported into file " . $cachePage . ".\n";
-?>
+$count = count($textRepo->getAllEntries());
+echo sprintf($config->getLang('importall'), $count, $cachePage). "\n";

@@ -1,13 +1,33 @@
 <?php
 require_once('ZoteroEntry.php');
 
+/**
+ * Stores entries
+ */
 abstract class ZoteroRepository
 {
+    /** @var ZoteroEntry[]  */
 	protected $entries = array();
 
-	/**
-	 * @return	ZoteroEntry
-	 */		
+    /**
+     * @var ZoteroConfig
+     */
+    protected $config = null;
+
+    /**
+     * Get config
+     *
+     * @param ZoteroConfig $config
+     */
+    public function __construct(ZoteroConfig $config) {
+        $this->config = $config;
+    }
+
+    /**
+     * @param string $zoteroId
+     * @throws ZoteroEntryNotFoundException
+     * @return    ZoteroEntry
+     */
 	public function getEntryByID($zoteroId)
 	{
 		$e = @$this->entries[$zoteroId];
@@ -17,13 +37,16 @@ abstract class ZoteroRepository
 		}
 		else
 		{
-			throw new ZoteroEntryNotFoundException("Zotero entry with ID " . $zoteroId . " not found.");
+            $msg = sprintf($this->config->getLang('reponoid', hsc($zoteroId)));
+			throw new ZoteroEntryNotFoundException($msg);
 		}
 	}
 
-	/**
-	 * @return	ZoteroEntry
-	 */		
+    /**
+     * @param $citeKey
+     * @throws ZoteroEntryNotFoundException
+     * @return    ZoteroEntry
+     */
 	public function getEntryByCiteKey($citeKey)
 	{
 		foreach ($this->entries as $e)
@@ -33,21 +56,31 @@ abstract class ZoteroRepository
 				return $e;
 			}
 		}
-		throw new ZoteroEntryNotFoundException("Zotero entry with cite key " . $citeKey . " not found.");
+
+        $msg = sprintf($this->config->getLang('reponocitekey'), hsc($citeKey));
+        throw new ZoteroEntryNotFoundException($msg);
 	}
 
-	public function getAllEntries()
+    /**
+     * @return ZoteroEntry[]
+     */
+    public function getAllEntries()
 	{
 		return $this->entries;
 	}
-	
-	public function updateAndSaveEntries(array $entries)
+
+    /**
+     * @param array $entries
+     */
+    public function updateAndSaveEntries(array $entries)
 	{}
 
-	public function saveEntries(array $entries)
+    /**
+     * @param array $entries
+     */
+    public function saveEntries(array $entries)
     {
         $this->entries = array();
         $this->updateAndSaveEntries($entries);
     }
 }
-?>

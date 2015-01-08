@@ -4,6 +4,9 @@ require_once('ZoteroEntryNotFoundException.php');
 require_once('ZoteroFeedReader.php');
 require_once('ZoteroConfig.php');
 
+/**
+ * Retrieve and temporary stores entries from the online zotero repository
+ */
 class FeedZoteroRepository extends ZoteroRepository
 {
 	/**
@@ -15,33 +18,38 @@ class FeedZoteroRepository extends ZoteroRepository
 	 * @var DomXPath
 	 */
 	private $xpath;
-	
-	/**
-	 * @var ZoteroConfig
-	 */
-	private $config;
-		
-	public function __construct(ZoteroFeedReader $feedReader, ZoteroConfig $config)
+
+    /**
+     * @param ZoteroConfig     $config
+     * @param ZoteroFeedReader $feedReader
+     */
+    public function __construct(ZoteroConfig $config, ZoteroFeedReader $feedReader)
 	{
-		$this->config = $config;
+        parent::__construct($config);
+
 		$this->parseEntries($feedReader->getFeed());
 	}
-		
-	private function parseEntries($feed)
-	{
+
+    /**
+     * Parse given feed and store complete entries
+     *
+     * @param string $feed
+     */
+    private function parseEntries($feed)
+	{                                   dbglog($feed);
 		$this->dom = new DomDocument();
     	$this->dom->loadXml($feed);
 		$this->createXPath();
 
-		$r = $this->xpath->query('//atom:feed/atom:entry');
-		foreach ($r as $node)
+		$domnodelist = $this->xpath->query('//atom:feed/atom:entry');
+		foreach ($domnodelist as $domnode)
 		{
-			$itemType = $this->parseItemType($node);
+			$itemType = $this->parseItemType($domnode);
 			if ($itemType == "note" || $itemType == "attachment")
 			{
 				continue;
 			}
-			$e = $this->createEntry($node);
+			$e = $this->createEntry($domnode);
 			if ($e->getZoteroId() !== "" && $e->getAuthor() !== "" && $e->getTitle() !== "")
 			{
 				$this->entries[$e->getZoteroId()] = $e;
@@ -56,9 +64,12 @@ class FeedZoteroRepository extends ZoteroRepository
 		$this->xpath->registerNameSpace("zapi", "http://zotero.org/ns/api");
 	}
 
-	/**
-	 * @return ZoteroEntry
-	 */
+    /**
+     * Return new ZoteroEntry with content from given node
+     *
+     * @param DOMNode $node
+     * @return ZoteroEntry
+     */
 	private function createEntry($node)
 	{
 		$zoteroId = $this->parseId($node);
@@ -67,47 +78,76 @@ class FeedZoteroRepository extends ZoteroRepository
 		return $e;
 	}
 
-	private function parseItemType($node)
+    /**
+     * Return item type
+     *
+     * @param DOMNode $node
+     * @return string
+     * @throws ZoteroParserException
+     */
+    private function parseItemType($node)
 	{
-		$item = $this->xpath->query("./zapi:itemType", $node)->item(0);
-		if ($item == null)
+		$itemtype = $this->xpath->query("./zapi:itemType", $node)->item(0);
+		if ($itemtype == null)
 		{
-			throw new ZoteroParserException("Zotero item type could not be found in node " . $node);
+			throw new ZoteroParserException(sprintf($this->config->getLang('feeditemtypenotfound'), hsc($node)));
 		}
-		return $item->nodeValue;
+		return $itemtype->nodeValue;
 	}
 
-	private function parseId($node)
+    /**
+     * Return item id
+     *
+     * @param DOMNode $node
+     * @return string
+     * @throws ZoteroParserException
+     */
+    private function parseId($node)
 	{
 		$item = $this->xpath->query("./zapi:key", $node)->item(0);
 		if ($item == null)
 		{
-			throw new ZoteroParserException("Zotero ID could not be found in node " . $node);
+			throw new ZoteroParserException(sprintf($this->config->getLang('feedidnotfound'), hsc($node)));
 		}
 		return $item->nodeValue;
 	}
-	
-	private function parseData($node, ZoteroEntry $e)
+
+    /**
+     * Parse item content and store at given ZoteroEntry
+     *
+     * @param DOMNode     $node
+     * @param ZoteroEntry $entry
+     * @throws ZoteroParserException
+     */
+    private function parseData($node, ZoteroEntry $entry)
 	{
+
 		$item = $this->xpath->query("./atom:content", $node)->item(0);
 		if ($item == null)
 		{
-			throw new ZoteroParserException("Entry content could not be found in node " . $node);
+			throw new ZoteroParserException(sprintf($this->config->getLang('feedcontentnotfound'), hsc($node)));
 		}
 		$json = $item->nodeValue;
 		$data = json_decode($json);
-		
-		$e->setAuthor($this->parseAuthor($data));
-		if (isset($data->title)) { $e->setTitle(html_entity_decode($data->title)); }
-		if (isset($data->shortTitle)) { $e->setCiteKey(html_entity_decode($data->shortTitle)); }
-		if (isset($data->date)) { $e->setDate(html_entity_decode($data->date)); }
+        print_r($data);
+		$entry->setAuthor($this->parseAuthor($data));
+		if (isset($data->title))        { $entry->setTitle(hsc($data->title)); }
+		if (isset($data->shortTitle))   { $entry->setCiteKey(hsc($data->shortTitle)); }
+		if (isset($data->date))         { $entry->setDate(hsc($data->date)); }
+        if (isset($data->pages))        { $entry->setPages(hsc($data->pages)); }
 	}
-	
-	private function parseAuthor($data)
+
+    /**
+     * Return author name (only first)
+     *
+     * @param $data
+     * @return mixed|string
+     */
+    private function parseAuthor($data)
 	{
 		if (count($data->creators) == 0)
 		{
-			return "Author not specified";
+			return $this->config->getLang('feednoauthor');
 		}
 		$authorName = "";
 		$author = $data->creators[0];
@@ -125,13 +165,12 @@ class FeedZoteroRepository extends ZoteroRepository
 		}
 		if ($authorName == "")
 		{
-			return "Author not specified";
+			return $this->config->getLang('feednoauthor');
 		}
 		if (count($data->creators) > 1)
 		{
-			$authorName .= " et.al.";
+			$authorName .= $this->config->getLang('feedmultiauthorabbr');
 		}
 		return $authorName;
 	}
 }
-?>
