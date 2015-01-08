@@ -1,6 +1,8 @@
+; Rename this file to config.ini and fill your access data
+
 [ZoteroAccess]
-; this username is used to connect to the Zotero website
-username = YOURUSERNAME 
+; this username is used to connect to the Zotero website (only lowercase)
+username = YOURUSERNAME
 ; this key is used to get access to Zotero's RSS feed
 key = YOURZOTEROKEY
 ; the user ID for the above username

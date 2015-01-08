@@ -1,5 +1,5 @@
 <?php
-require_once('..' . DIRECTORY_SEPARATOR . 'ZoteroEntry.php');
+require_once('..' . DIRECTORY_SEPARATOR . 'classes/ZoteroEntry.php');
 
 class ZoteroEntryTest extends PHPUnit_Framework_TestCase
 {

@@ -1,5 +1,5 @@
 <?php
-require_once('..' . DIRECTORY_SEPARATOR . 'ZoteroConfig.php');
+require_once('..' . DIRECTORY_SEPARATOR . 'classes/ZoteroConfig.php');
 
 class StubZoteroConfig extends ZoteroConfig
 {
