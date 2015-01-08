@@ -1,7 +1,7 @@
 <?php
 require_once('ZoteroRepositoryTest.php');
 require_once('StubZoteroConfig.php');
-require_once('..' . DIRECTORY_SEPARATOR . 'TextZoteroRepository.php');
+require_once('..' . DIRECTORY_SEPARATOR . 'classes/TextZoteroRepository.php');
 
 class TextZoteroRepositoryTest extends ZoteroRepositoryTest
 {

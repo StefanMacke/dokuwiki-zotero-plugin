@@ -3,10 +3,10 @@
 // downloading and parsing all Zotero entries could take quite some time
 set_time_limit(600);
 
-require_once('IniZoteroConfig.php');
-require_once('ImportZoteroFeedReader.php');
-require_once('FeedZoteroRepository.php');
-require_once('TextZoteroRepository.php');
+require_once('classes/IniZoteroConfig.php');
+require_once('classes/ImportZoteroFeedReader.php');
+require_once('classes/FeedZoteroRepository.php');
+require_once('classes/TextZoteroRepository.php');
 
 
 $config = new IniConfig();

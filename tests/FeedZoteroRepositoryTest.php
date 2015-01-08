@@ -1,6 +1,6 @@
 <?php
 require_once('ZoteroRepositoryTest.php');
-require_once('..' . DIRECTORY_SEPARATOR . 'FeedZoteroRepository.php');
+require_once('..' . DIRECTORY_SEPARATOR . 'classes/FeedZoteroRepository.php');
 require_once('StubZoteroFeedReader.php');
 require_once('StubZoteroConfig.php');
 

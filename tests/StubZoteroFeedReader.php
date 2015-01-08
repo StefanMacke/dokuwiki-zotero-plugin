@@ -1,5 +1,5 @@
 <?php
-require_once('..' . DIRECTORY_SEPARATOR . 'ZoteroFeedReader.php');
+require_once('..' . DIRECTORY_SEPARATOR . 'classes/ZoteroFeedReader.php');
 
 class StubZoteroFeedReader implements ZoteroFeedReader
 {

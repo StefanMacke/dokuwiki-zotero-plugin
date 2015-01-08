@@ -18,11 +18,11 @@ if (!defined('DOKU_PLUGIN'))
 }
 require_once(DOKU_PLUGIN . 'syntax.php');
 
-require_once("ZoteroEntry.php");
-require_once("FeedZoteroRepository.php");
-require_once("TextZoteroRepository.php");
-require_once("IniZoteroConfig.php");
-require_once("WebZoteroFeedReader.php");
+require_once("classes/ZoteroEntry.php");
+require_once("classes/FeedZoteroRepository.php");
+require_once("classes/TextZoteroRepository.php");
+require_once("classes/IniZoteroConfig.php");
+require_once("classes/WebZoteroFeedReader.php");
 
 class syntax_plugin_zotero extends DokuWiki_Syntax_Plugin
 {
