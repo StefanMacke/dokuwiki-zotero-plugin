@@ -63,7 +63,7 @@ class syntax_plugin_zotero extends DokuWiki_Syntax_Plugin
 		$this->Lexer->addSpecialPattern('\\\cite.*?\}', $mode, 'plugin_zotero');
 	}
 
-	function handle($match, $state, $pos, &$handler)
+	function handle($match, $state, $pos, Doku_Handler $handler)
 	{
 		$citeKey = "";
 		$pageRef = "";
@@ -167,7 +167,7 @@ class syntax_plugin_zotero extends DokuWiki_Syntax_Plugin
 		return '<a href="' . $this->config->getUrlForEntry($entry) . '" title="' . htmlentities($entry->getShortInfo($format)) . '">' . htmlentities($entry->getCiteKey()) . "</a>";
 	}
 	
-	function render($mode, &$renderer, $data) 
+	function render($mode, Doku_Renderer $renderer, $data) 
 	{
 		if($mode == 'xhtml')
 		{
